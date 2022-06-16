@@ -1,6 +1,6 @@
 <?php 
   session_start();
-  include"c_show_category.php";
+  include"./c_show_category.php";
   if(isset($_GET['id'])){
     $id_product=$_GET['id'];
     $sql="SELECT * FROM products as p  INNER JOIN USERS on p.user_id = USERS.id_user WHERE p.id_product=$id_product";
@@ -435,6 +435,19 @@
               </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic-product-albums" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-floor-plan"></i>
+              <span class="menu-title">Product Album</span>
+              <i class="menu-arrow"></i> 
+            </a>
+            <div class="collapse" id="ui-basic-product-albums">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="productalbum.php">Product Albums</a></li>
+                <li class="nav-item"> <a class="nav-link" href="addproductalbum.php">Add Product Albums</a></li>
+              </ul>
+            </div>
+          </li>
           <li class="nav-item nav-category">Forms and Datas</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
@@ -610,7 +623,7 @@
                       </div>
                     </div>
                    
-                    <button type="submit" class="btn btn-primary me-2" name="update_submit">Add</button>
+                    <button type="submit" class="btn btn-primary me-2" name="update_submit">Update</button>
                     <button class="btn btn-light">Cancel</button>
                   </form>
                   <?php endif;?>

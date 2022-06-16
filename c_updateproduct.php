@@ -24,38 +24,27 @@
                 $file_path=$folder_path.$_FILES['product_image']['name'];
                 $file_type=strtolower(pathinfo($file_path,PATHINFO_EXTENSION));
                 $flag_ok=true;
-                // check phải file image không
-                $check=getimagesize($_FILES['product_image']['tmp_name']);
-                if($check !==false){
-                    $flag_ok=true;
-                    if(!in_array($file_type,$ex)){
-                        //check type image
+                if(!in_array($file_type,$ex)){
+                    //check type image
+                    $flag_ok=false;
+                    //header("location:../editproduct.php?error=file không hợp lệ hãy dùng các file có dạng jpg, png, jpeg");
+                }else{
+                    if($_FILES['product_image']['size']>500000){
+                        //check dung lượng uploads files
                         $flag_ok=false;
-                        //header("location:../editproduct.php?error=file không hợp lệ hãy dùng các file có dạng jpg, png, jpeg");
-                    }else{
-                        if($_FILES['product_image']['size']>500000){
-                            //check dung lượng uploads files
-                            $flag_ok=false;
-                            //header("location:../editproduct.php?error=dung lượng file lớn 500000  bytes");
-                        }else{ 
-                        $product_image=$file_path;
-                        date_default_timezone_set('Asia/Ho_Chi_Minh');
-                        $updated_at=date('Y/m/d H:i:s');
-                        move_uploaded_file($_FILES['product_image']['tmp_name'],$file_path);
-                        $sql = "UPDATE products SET product_name='$name', user_id='$user_id',category_id='$category_id',product_image='$product_image',
-                        product_quantity='$quantity',product_description='$description',product_price='$price',created_at='$created_at',updated_at='$updated_at' 
-                        WHERE id_product='$id_product'";
-                        $result=$conn->query($sql);
-                        header('location:./editproduct.php?id='.$id_product);
-                        }
+                        //header("location:../editproduct.php?error=dung lượng file lớn 500000  bytes");
+                    }else{ 
+                    $product_image=$file_path;
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+                    $updated_at=date('Y/m/d H:i:s');
+                    move_uploaded_file($_FILES['product_image']['tmp_name'],$file_path);
+                    $sql = "UPDATE products SET product_name='$name', user_id='$user_id',category_id='$category_id',product_image='$product_image',
+                    product_quantity='$quantity',product_description='$description',product_price='$price',created_at='$created_at',updated_at='$updated_at' 
+                    WHERE id_product='$id_product'";
+                    $result=$conn->query($sql);
+                    header('location:./editproduct.php?id='.$id_product);
                     }
                 }
-                   
-
-                 
-                
-
-                
             }catch(Exception $e)
             {
                 die($e->getMessage());

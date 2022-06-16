@@ -34,7 +34,7 @@
               </div>
               <h4>Hello! let's get started</h4>
               <h6 class="fw-light">Sign in to continue.</h6>
-              <form class="pt-3" action="./c_login.php" method="POST">
+              <form class="pt-3" action="c_login.php" method="POST">
                 <?php if(isset($_GET["error"])):?>
                 <div class="alert alert-danger">
                   <strong><?=$_GET["error"]?></strong>
